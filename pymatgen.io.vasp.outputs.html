@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.vasp.outputs module &#8212; pymatgen 2017.06.08 documentation</title>
+    <title>pymatgen.io.vasp.outputs module &#8212; pymatgen 2017.6.8 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2017.06.08',
+        VERSION:     '2017.6.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 2017.06.08 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 2017.6.8 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -272,6 +272,41 @@ other value than the default.</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="pymatgen.io.vasp.outputs.Outcar.unsym_cs_tensor">
+<code class="descname">unsym_cs_tensor</code><a class="headerlink" href="#pymatgen.io.vasp.outputs.Outcar.unsym_cs_tensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unsymmetrized Chemical Shift tensor matrixes on each ion as a list.
+e.g.,
+[[[sigma11, sigma12, sigma13],</p>
+<blockquote>
+<div><blockquote>
+<div>[sigma21, sigma22, sigma23],
+[sigma31, sigma32, sigma33]],
+...</div></blockquote>
+<dl class="docutils">
+<dt>[[sigma11, sigma12, sigma13],</dt>
+<dd>[sigma21, sigma22, sigma23],
+[sigma31, sigma32, sigma33]]]</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">unsym_cs_tensor</code></dt>
+<dt>
+<code class="descname">G=0 contribution to chemical shift. 2D rank 3 matrix</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.outputs.Outcar.cs_core_contribution">
+<code class="descname">cs_core_contribution</code><a class="headerlink" href="#pymatgen.io.vasp.outputs.Outcar.cs_core_contribution" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">Core contribution to chemical shift. dict. e.g.,</code></dt>
+<dt>
+<code class="descname">{'Mg': -412.8, 'C': -200.5, 'O': -271.1}</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="pymatgen.io.vasp.outputs.Outcar.efg">
 <code class="descname">efg</code><a class="headerlink" href="#pymatgen.io.vasp.outputs.Outcar.efg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Electric Field Gradient (EFG) tensor on each ion as a tuple of dict, e.g.,
@@ -380,6 +415,30 @@ structure at the last ionic step is [5][&#8220;2s&#8221;][-1]</p>
 <dt id="pymatgen.io.vasp.outputs.Outcar.read_corrections">
 <code class="descname">read_corrections</code><span class="sig-paren">(</span><em>reverse=True</em>, <em>terminate_on_match=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/outputs.html#Outcar.read_corrections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.outputs.Outcar.read_corrections" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.vasp.outputs.Outcar.read_cs_core_contribution">
+<code class="descname">read_cs_core_contribution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/outputs.html#Outcar.read_cs_core_contribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.outputs.Outcar.read_cs_core_contribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the core contribution of NMR chemical shift.</p>
+<p>Returns:
+G0 contribution matrix as list of list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.vasp.outputs.Outcar.read_cs_g0_contribution">
+<code class="descname">read_cs_g0_contribution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/outputs.html#Outcar.read_cs_g0_contribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.outputs.Outcar.read_cs_g0_contribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the  G0 contribution of NMR chemical shift.</p>
+<p>Returns:
+G0 contribution matrix as list of list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.vasp.outputs.Outcar.read_cs_raw_symmetrized_tensors">
+<code class="descname">read_cs_raw_symmetrized_tensors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/outputs.html#Outcar.read_cs_raw_symmetrized_tensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.outputs.Outcar.read_cs_raw_symmetrized_tensors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the matrix form of NMR tensor before corrected to table.</p>
+<p>Returns:
+nsymmetrized tensors list in the order of atoms.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="pymatgen.io.vasp.outputs.Outcar.read_elastic_tensor">
@@ -1565,13 +1624,13 @@ any. Note that this is sometimes very large</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 2017.06.08 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 2017.6.8 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

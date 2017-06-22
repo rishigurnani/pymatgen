@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.vasp.outputs &#8212; pymatgen 2017.06.08 documentation</title>
+    <title>pymatgen.io.vasp.outputs &#8212; pymatgen 2017.6.8 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '2017.06.08',
+        VERSION:     '2017.6.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 2017.06.08 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 2017.6.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../pymatgen.html" accesskey="U">pymatgen</a> &#187;</li> 
       </ul>
@@ -177,7 +177,11 @@
 
 
 <span class="k">def</span> <span class="nf">_parse_varray</span><span class="p">(</span><span class="n">elem</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[[</span><span class="n">_vasprun_float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">elem</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">elem</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;logical&#39;</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="p">[[</span><span class="kc">True</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="s1">&#39;T&#39;</span> <span class="k">else</span> <span class="kc">False</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">elem</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="p">[[</span><span class="n">_vasprun_float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">elem</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">m</span>
 
 
 <span class="k">def</span> <span class="nf">_parse_from_incar</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
@@ -1055,7 +1059,12 @@
     <span class="k">def</span> <span class="nf">_parse_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elem</span><span class="p">):</span>
         <span class="n">latt</span> <span class="o">=</span> <span class="n">_parse_varray</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;crystal&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;varray&quot;</span><span class="p">))</span>
         <span class="n">pos</span> <span class="o">=</span> <span class="n">_parse_varray</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;varray&quot;</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">Structure</span><span class="p">(</span><span class="n">latt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">atomic_symbols</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="n">struct</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span><span class="n">latt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">atomic_symbols</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="n">sdyn</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;varray/[@name=&#39;selective&#39;]&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sdyn</span><span class="p">:</span>
+            <span class="n">struct</span><span class="o">.</span><span class="n">add_site_property</span><span class="p">(</span><span class="s1">&#39;selective_dynamics&#39;</span><span class="p">,</span>
+                                     <span class="n">_parse_varray</span><span class="p">(</span><span class="n">sdyn</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">struct</span>
 
     <span class="k">def</span> <span class="nf">_parse_diel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elem</span><span class="p">):</span>
         <span class="n">imag</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">float</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
@@ -1358,6 +1367,25 @@
 
 <span class="sd">        Chemical Shift on each ion as a tuple of ChemicalShiftNotation, e.g.,</span>
 <span class="sd">        (cs1, cs2, ...)</span>
+<span class="sd">        </span>
+<span class="sd">    .. attribute:: unsym_cs_tensor</span>
+
+<span class="sd">        Unsymmetrized Chemical Shift tensor matrixes on each ion as a list.</span>
+<span class="sd">        e.g.,</span>
+<span class="sd">        [[[sigma11, sigma12, sigma13],</span>
+<span class="sd">          [sigma21, sigma22, sigma23],</span>
+<span class="sd">          [sigma31, sigma32, sigma33]],</span>
+<span class="sd">          ...</span>
+<span class="sd">         [[sigma11, sigma12, sigma13],</span>
+<span class="sd">          [sigma21, sigma22, sigma23],</span>
+<span class="sd">          [sigma31, sigma32, sigma33]]]</span>
+<span class="sd">          </span>
+<span class="sd">    .. attribute:: unsym_cs_tensor </span>
+<span class="sd">        G=0 contribution to chemical shift. 2D rank 3 matrix</span>
+<span class="sd">    </span>
+<span class="sd">    .. attribute:: cs_core_contribution</span>
+<span class="sd">       Core contribution to chemical shift. dict. e.g.,</span>
+<span class="sd">       {&#39;Mg&#39;: -412.8, &#39;C&#39;: -200.5, &#39;O&#39;: -271.1}</span>
 
 <span class="sd">    .. attribute:: efg</span>
 
@@ -1631,7 +1659,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">header_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+frequency dependent\s+IMAGINARY &quot;</span> \
                          <span class="sa">r</span><span class="s2">&quot;DIELECTRIC FUNCTION \(independent particle, &quot;</span> \
-                         <span class="sa">r</span><span class="s2">&quot;no local field effects\)\s*&quot;</span>
+                         <span class="sa">r</span><span class="s2">&quot;no local field effects\)(\sdensity-density)*$&quot;</span>
         <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">r</span><span class="s2">&quot;([\.\-\d]+)&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">7</span><span class="p">)</span>
 
         <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1700,6 +1728,89 @@
                 <span class="n">cs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
             <span class="n">all_cs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;chemical_shifts&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_cs</span></div>
+
+
+<div class="viewcode-block" id="Outcar.read_cs_g0_contribution"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar.read_cs_g0_contribution">[docs]</a>    <span class="k">def</span> <span class="nf">read_cs_g0_contribution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Parse the  G0 contribution of NMR chemical shift.</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">            G0 contribution matrix as list of list. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">header_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^\s+G\=0 CONTRIBUTION TO CHEMICAL SHIFT \(field along BDIR\)\s+$\n&#39;</span> \
+                         <span class="sa">r</span><span class="s1">&#39;^\s+-{50,}$\n&#39;</span> \
+                         <span class="sa">r</span><span class="s1">&#39;^\s+BDIR\s+X\s+Y\s+Z\s*$\n&#39;</span> \
+                         <span class="sa">r</span><span class="s1">&#39;^\s+-{50,}\s*$\n&#39;</span>
+        <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(?:\d+)\s+&#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">r</span><span class="s1">&#39;([-]?\d+\.\d+)&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">footer_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\s+-{50,}\s*$&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_table_pattern</span><span class="p">(</span><span class="n">header_pattern</span><span class="p">,</span> <span class="n">row_pattern</span><span class="p">,</span> <span class="n">footer_pattern</span><span class="p">,</span> <span class="n">postprocess</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+                                <span class="n">last_one_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">attribute_name</span><span class="o">=</span><span class="s2">&quot;cs_g0_contribution&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;cs_g0_contribution&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Outcar.read_cs_core_contribution"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar.read_cs_core_contribution">[docs]</a>    <span class="k">def</span> <span class="nf">read_cs_core_contribution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Parse the core contribution of NMR chemical shift.</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">            G0 contribution matrix as list of list. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">header_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^\s+Core NMR properties\s*$\n&#39;</span> \
+                         <span class="sa">r</span><span class="s1">&#39;\n&#39;</span> \
+                         <span class="sa">r</span><span class="s1">&#39;^\s+typ\s+El\s+Core shift \(ppm\)\s*$\n&#39;</span> \
+                         <span class="sa">r</span><span class="s1">&#39;^\s+-{20,}$\n&#39;</span>
+        <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\d+\s+(?P&lt;element&gt;[A-Z][a-z]?\w?)\s+(?P&lt;shift&gt;[-]?\d+\.\d+)&#39;</span>
+        <span class="n">footer_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\s+-{20,}\s*$&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_table_pattern</span><span class="p">(</span><span class="n">header_pattern</span><span class="p">,</span> <span class="n">row_pattern</span><span class="p">,</span> <span class="n">footer_pattern</span><span class="p">,</span> <span class="n">postprocess</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                                <span class="n">last_one_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">attribute_name</span><span class="o">=</span><span class="s2">&quot;cs_core_contribution&quot;</span><span class="p">)</span>
+        <span class="n">core_contrib</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;element&#39;</span><span class="p">]:</span> <span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;shift&#39;</span><span class="p">])</span>
+                        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;cs_core_contribution&quot;</span><span class="p">]}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;cs_core_contribution&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">core_contrib</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;cs_core_contribution&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Outcar.read_cs_raw_symmetrized_tensors"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar.read_cs_raw_symmetrized_tensors">[docs]</a>    <span class="k">def</span> <span class="nf">read_cs_raw_symmetrized_tensors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse the matrix form of NMR tensor before corrected to table.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">        nsymmetrized tensors list in the order of atoms. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">header_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+-{50,}\s+&quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;\s+Absolute Chemical Shift tensors\s+&quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;\s+-{50,}$&quot;</span>
+        <span class="n">first_part_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+UNSYMMETRIZED TENSORS\s+$&quot;</span>
+        <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">r</span><span class="s2">&quot;([-]?\d+\.\d+)&quot;</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">unsym_footer_pattern</span> <span class="o">=</span> <span class="s2">&quot;^\s+SYMMETRIZED TENSORS\s+$&quot;</span>
+
+        <span class="k">with</span> <span class="n">zopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">unsym_table_pattern_text</span> <span class="o">=</span> <span class="n">header_pattern</span> <span class="o">+</span> <span class="n">first_part_pattern</span> <span class="o">+</span> \
+                                   <span class="sa">r</span><span class="s2">&quot;(?P&lt;table_body&gt;.+)&quot;</span> <span class="o">+</span> <span class="n">unsym_footer_pattern</span>
+        <span class="n">table_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">unsym_table_pattern_text</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+        <span class="n">rp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">row_pattern</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">table_pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+            <span class="n">table_text</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;table_body&quot;</span><span class="p">)</span>
+            <span class="n">micro_header_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;ion\s+\d+&quot;</span>
+            <span class="n">micro_table_pattern_text</span> <span class="o">=</span> <span class="n">micro_header_pattern</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;\s*^(?P&lt;table_body&gt;(?:\s*&quot;</span> <span class="o">+</span> \
+                                       <span class="n">row_pattern</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;)+)\s+&quot;</span>
+            <span class="n">micro_table_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">micro_table_pattern_text</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+            <span class="n">unsym_tensors</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">mt</span> <span class="ow">in</span> <span class="n">micro_table_pattern</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">table_text</span><span class="p">):</span>
+                <span class="n">table_body_text</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;table_body&quot;</span><span class="p">)</span>
+                <span class="n">tensor_matrix</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">table_body_text</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                    <span class="n">ml</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                    <span class="n">processed_line</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ml</span><span class="o">.</span><span class="n">groups</span><span class="p">()]</span>
+                    <span class="n">tensor_matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">processed_line</span><span class="p">)</span>
+                <span class="n">unsym_tensors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tensor_matrix</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;unsym_cs_tensor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unsym_tensors</span>
+            <span class="k">return</span> <span class="n">unsym_tensors</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;NMR UNSYMMETRIZED TENSORS is not found&quot;</span><span class="p">)</span></div>
+
+
 
 <div class="viewcode-block" id="Outcar.read_nmr_efg"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar.read_nmr_efg">[docs]</a>    <span class="k">def</span> <span class="nf">read_nmr_efg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3457,7 +3568,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 2017.06.08 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 2017.6.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../pymatgen.html" >pymatgen</a> &#187;</li> 
       </ul>
@@ -3465,7 +3576,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking
