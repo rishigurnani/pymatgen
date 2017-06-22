@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &#8212; pymatgen 2017.6.8 documentation</title>
+    <title>Introduction &#8212; pymatgen 2017.6.22 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2017.6.8',
+        VERSION:     '2017.6.22',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -50,7 +50,7 @@
         <li class="right" >
           <a href="installation.html" title="Requirements"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">pymatgen 2017.6.8 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">pymatgen 2017.6.22 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -144,14 +144,14 @@ compatible. Our approach is to have a single codebase support Python 2.7 and
 </div>
 <div class="section" id="change-log">
 <h1>Change log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="v2017-06-08">
-<h2>v2017.06.08<a class="headerlink" href="#v2017-06-08" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="v2017-6-22">
+<h2>v2017.6.22<a class="headerlink" href="#v2017-6-22" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Switch to date-based version for pymatgen.</li>
-<li>Electronegativities now available for all elements except for He, Ne and
-Ar, which are set to infinity with a warning.</li>
-<li>Bond lengths are now set to sum of atomic radii with warning if not available.</li>
-<li>Bug fixes to boltztrap, symmetry for trigonal-hex systems, etc.</li>
+<li>Speed up pmg load times.</li>
+<li>Selective dynamics parsing for Vasprun (Joseph Montaya)</li>
+<li>Allow element radius updates in get_dimensionality (Viet-Anh Ha).</li>
+<li>Dielectric function parse for vasp 5.4.4 (Zhenbin Wang).</li>
+<li>Parsing for CIF implicit hydrogens (Xiaohui Qu).</li>
 </ul>
 <p><a class="reference internal" href="change_log.html"><span class="doc">Older versions</span></a></p>
 </div>
@@ -637,7 +637,7 @@ to indicate the copyright and license terms:</p>
 <li><a class="reference internal" href="#matgenie-examples">Matgenie &amp; Examples</a></li>
 <li><a class="reference internal" href="#why-use-pymatgen">Why use pymatgen?</a></li>
 <li><a class="reference internal" href="#change-log">Change log</a><ul>
-<li><a class="reference internal" href="#v2017-06-08">v2017.06.08</a></li>
+<li><a class="reference internal" href="#v2017-6-22">v2017.6.22</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#getting-pymatgen">Getting pymatgen</a><ul>
@@ -702,7 +702,7 @@ to indicate the copyright and license terms:</p>
         <li class="right" >
           <a href="installation.html" title="Requirements"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">pymatgen 2017.6.8 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">pymatgen 2017.6.22 documentation</a> &#187;</li> 
       </ul>
     </div>
 
