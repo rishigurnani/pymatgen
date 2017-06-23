@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.matproj.rest module &#8212; pymatgen 2017.6.22 documentation</title>
+    <title>pymatgen.ext.jhu module &#8212; pymatgen 2017.6.22 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -55,8 +55,45 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-pymatgen.matproj.rest">
-<span id="pymatgen-matproj-rest-module"></span><h1>pymatgen.matproj.rest module<a class="headerlink" href="#module-pymatgen.matproj.rest" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-pymatgen.ext.jhu">
+<span id="pymatgen-ext-jhu-module"></span><h1>pymatgen.ext.jhu module<a class="headerlink" href="#module-pymatgen.ext.jhu" title="Permalink to this headline">¶</a></h1>
+<p>This module creates an interface to the JHU kpoints servlet,
+see <a class="reference external" href="http://muellergroup.jhu.edu/K-Points.html">http://muellergroup.jhu.edu/K-Points.html</a>.</p>
+<dl class="function">
+<dt id="pymatgen.ext.jhu.get_kpoints">
+<code class="descname">get_kpoints</code><span class="sig-paren">(</span><em>structure</em>, <em>min_distance=0</em>, <em>min_total_kpoints=1</em>, <em>kppra=None</em>, <em>gap_distance=7</em>, <em>remove_symmetry=None</em>, <em>include_gamma='auto'</em>, <em>header='simple'</em>, <em>incar=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/ext/jhu.html#get_kpoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.ext.jhu.get_kpoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get kpoints object from JHU servlet, per Wisesa-McGill-Mueller
+methodology.  Refer to <a class="reference external" href="http://muellergroup.jhu.edu/K-Points.html">http://muellergroup.jhu.edu/K-Points.html</a>
+and P. Wisesa, K. A. McGill, T. Mueller, Phys. Rev. B 93,
+155109 (2016)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>structure</strong> (<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a>) &#8211; structure object</li>
+<li><strong>min_distance</strong> (<em>float</em>) &#8211; The minimum allowed distance
+between lattice points on the real-space superlattice</li>
+<li><strong>min_total_kpoints</strong> (<em>int</em>) &#8211; The minimum allowed number of
+total k-points in the Brillouin zone.</li>
+<li><strong>kppra</strong> (<em>float</em>) &#8211; minimum k-points per reciprocal atom.</li>
+<li><strong>gap_distance</strong> (<em>float</em>) &#8211; auto-detection threshold for
+non-periodicity (in slabs, nanowires, etc.)</li>
+<li><strong>remove_symmetry</strong> (<a class="reference internal" href="pymatgen.util.string.html#module-pymatgen.util.string" title="pymatgen.util.string"><em>string</em></a>) &#8211; optional flag to control
+symmetry options, can be none, structural,
+time_reversal, or all</li>
+<li><strong>include_gamma</strong> (<a class="reference internal" href="pymatgen.util.string.html#module-pymatgen.util.string" title="pymatgen.util.string"><em>string</em></a><em> or </em><em>bool</em>) &#8211; whether to include
+gamma point</li>
+<li><strong>header</strong> (<a class="reference internal" href="pymatgen.util.string.html#module-pymatgen.util.string" title="pymatgen.util.string"><em>string</em></a>) &#8211; &#8220;verbose&#8221; or &#8220;simple&#8221;, denotes
+the verbosity of the header</li>
+<li><strong>incar</strong> (<a class="reference internal" href="pymatgen.io.vasp.inputs.html#pymatgen.io.vasp.inputs.Incar" title="pymatgen.io.vasp.inputs.Incar"><em>Incar</em></a>) &#8211; incar object to upload</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 
 
@@ -68,7 +105,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.matproj.rest.rst.txt"
+      <li><a href="_sources/pymatgen.ext.jhu.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>

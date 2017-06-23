@@ -100,6 +100,21 @@
 <span class="n">SETTINGS</span> <span class="o">=</span> <span class="n">_load_pmg_settings</span><span class="p">()</span>
 
 
+<span class="c1"># Order of imports is important on some systems to avoid</span>
+<span class="c1"># failures when loading shared libraries.</span>
+<span class="c1"># import spglib</span>
+<span class="c1"># from . import optimization, util</span>
+<span class="c1"># del(spglib, optimization, util)</span>
+
+<span class="c1"># Useful aliases for commonly used objects and modules.</span>
+<span class="c1"># Allows from pymatgen import &lt;class&gt; for quick usage.</span>
+
+<span class="kn">from</span> <span class="nn">pymatgen.core</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.electronic_structure.core</span> <span class="k">import</span> <span class="n">Spin</span><span class="p">,</span> <span class="n">Orbital</span>
+<span class="kn">from</span> <span class="nn">.ext.matproj</span> <span class="k">import</span> <span class="n">MPRester</span>
+<span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MontyEncoder</span><span class="p">,</span> <span class="n">MontyDecoder</span><span class="p">,</span> <span class="n">MSONable</span>
+
+
 <div class="viewcode-block" id="get_structure_from_mp"><a class="viewcode-back" href="../pymatgen.html#pymatgen.get_structure_from_mp">[docs]</a><span class="k">def</span> <span class="nf">get_structure_from_mp</span><span class="p">(</span><span class="n">formula</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convenience method to get a crystal from the Materials Project database via</span>
@@ -112,36 +127,16 @@
 <span class="sd">        (Structure) The lowest energy structure in Materials Project with that</span>
 <span class="sd">            formula.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PMG_MAPI_KEY&quot;</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;PMG_MAPI_KEY must be set in .pmgrc.yaml to use this &quot;</span>
-                           <span class="s2">&quot;function.&quot;</span><span class="p">)</span>
-
-    <span class="kn">from</span> <span class="nn">pymatgen.matproj.rest</span> <span class="k">import</span> <span class="n">MPRester</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">MPRester</span><span class="p">()</span>
     <span class="n">entries</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">get_entries</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">inc_structure</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No structure with formula </span><span class="si">%s</span><span class="s2"> in Materials Project!&quot;</span> <span class="o">%</span>
                          <span class="n">formula</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> structures with formula </span><span class="si">%s</span><span class="s2"> found in Materials Project.&quot;</span>
-                      <span class="s2">&quot;The lowest energy structure will be returned.&quot;</span> <span class="o">%</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> structures with formula </span><span class="si">%s</span><span class="s2"> found in Materials &quot;</span>
+                      <span class="s2">&quot;Project. The lowest energy structure will be returned.&quot;</span> <span class="o">%</span>
                       <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">),</span> <span class="n">formula</span><span class="p">))</span>
     <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">energy_per_atom</span><span class="p">)</span><span class="o">.</span><span class="n">structure</span></div>
-
-
-<span class="c1"># Order of imports is important on some systems to avoid</span>
-<span class="c1"># failures when loading shared libraries.</span>
-<span class="c1"># import spglib</span>
-<span class="c1"># from . import optimization, util</span>
-<span class="c1"># del(spglib, optimization, util)</span>
-
-<span class="c1"># Useful aliases for commonly used objects and modules.</span>
-<span class="c1"># Allows from pymatgen import &lt;class&gt; for quick usage.</span>
-
-<span class="kn">from</span> <span class="nn">pymatgen.core</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">.electronic_structure.core</span> <span class="k">import</span> <span class="n">Spin</span><span class="p">,</span> <span class="n">Orbital</span>
-<span class="kn">from</span> <span class="nn">.matproj.rest</span> <span class="k">import</span> <span class="n">MPRester</span>
-<span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MontyEncoder</span><span class="p">,</span> <span class="n">MontyDecoder</span><span class="p">,</span> <span class="n">MSONable</span>
 </pre></div>
 
           </div>

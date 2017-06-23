@@ -268,9 +268,9 @@
 <span class="sd">            of two ways, e.g. either {&quot;LDAUU&quot;:{&quot;O&quot;:{&quot;Fe&quot;:5}}} to set LDAUU</span>
 <span class="sd">            for Fe to 5 in an oxide, or {&quot;LDAUU&quot;:{&quot;Fe&quot;:5}} to set LDAUU to</span>
 <span class="sd">            5 regardless of the input structure.</span>
-<span class="sd">        user_kpoints_settings (dict): Allow user to override kpoints setting by</span>
-<span class="sd">            supplying a dict. E.g., {&quot;reciprocal_density&quot;: 1000}. Default is</span>
-<span class="sd">            None.</span>
+<span class="sd">        user_kpoints_settings (dict or Kpoints): Allow user to override kpoints </span>
+<span class="sd">            setting by supplying a dict E.g., {&quot;reciprocal_density&quot;: 1000}. </span>
+<span class="sd">            User can also supply Kpoints object. Default is None.</span>
 <span class="sd">        constrain_total_magmom (bool): Whether to constrain the total magmom</span>
 <span class="sd">            (NUPDOWN in INCAR) to be the sum of the expected MAGMOM for all</span>
 <span class="sd">            species. Defaults to False.</span>
@@ -408,6 +408,9 @@
 <span class="sd">            reciprocal lattice vector proportional to its length.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_kpoints_settings</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;KPOINTS&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">Kpoints</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">settings</span>
 
         <span class="c1"># If grid_density is in the kpoints_settings use</span>
         <span class="c1"># Kpoints.automatic_density</span>
