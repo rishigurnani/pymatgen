@@ -91,7 +91,8 @@ stipulated by the COD developers):</p>
 <dl class="method">
 <dt id="pymatgen.ext.cod.COD.get_cod_ids">
 <code class="descname">get_cod_ids</code><span class="sig-paren">(</span><em>formula</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/ext/cod.html#COD.get_cod_ids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.ext.cod.COD.get_cod_ids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Queries the COD for all cod ids associated with a formula.</p>
+<dd><p>Queries the COD for all cod ids associated with a formula. Requires
+mysql executable to be in the path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -107,18 +108,23 @@ stipulated by the COD developers):</p>
 <dl class="method">
 <dt id="pymatgen.ext.cod.COD.get_structure_by_formula">
 <code class="descname">get_structure_by_formula</code><span class="sig-paren">(</span><em>formula</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/ext/cod.html#COD.get_structure_by_formula"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.ext.cod.COD.get_structure_by_formula" title="Permalink to this definition">¶</a></dt>
-<dd><p>Queries the COD for structures by formula.</p>
+<dd><p>Queries the COD for structures by formula. Requires mysql executable to
+be in the path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>cod_id</strong> (<em>int</em>) &#8211; COD id.</li>
-<li><strong>kwargs</strong> &#8211; All kwargs supported by Structure.from_str.</li>
+<li><strong>kwargs</strong> &#8211; All kwargs supported by
+<code class="xref py py-func docutils literal"><span class="pre">pymatgen.core.structure.Structure.from_str()</span></code>.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Structure.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Structure, &#8220;cod_id&#8221;: cod_id, &#8220;sg&#8221;: &#8220;P n m a&#8221;}]</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[{&#8220;structure&#8221;</p>
 </td>
 </tr>
 </tbody>
@@ -135,7 +141,8 @@ stipulated by the COD developers):</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>cod_id</strong> (<em>int</em>) &#8211; COD id.</li>
-<li><strong>kwargs</strong> &#8211; All kwargs supported by Structure.from_str.</li>
+<li><strong>kwargs</strong> &#8211; All kwargs supported by
+<code class="xref py py-func docutils literal"><span class="pre">pymatgen.core.structure.Structure.from_str()</span></code>.</li>
 </ul>
 </td>
 </tr>

@@ -124,7 +124,8 @@
     <span class="nd">@requires</span><span class="p">(</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;mysql&quot;</span><span class="p">),</span> <span class="s2">&quot;mysql must be installed to use this query.&quot;</span><span class="p">)</span>
 <div class="viewcode-block" id="COD.get_cod_ids"><a class="viewcode-back" href="../../../pymatgen.ext.cod.html#pymatgen.ext.cod.COD.get_cod_ids">[docs]</a>    <span class="k">def</span> <span class="nf">get_cod_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Queries the COD for all cod ids associated with a formula.</span>
+<span class="sd">        Queries the COD for all cod ids associated with a formula. Requires</span>
+<span class="sd">        mysql executable to be in the path.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            formula (str): Formula.</span>
@@ -152,7 +153,8 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            cod_id (int): COD id.</span>
-<span class="sd">            kwargs: All kwargs supported by Structure.from_str.</span>
+<span class="sd">            kwargs: All kwargs supported by</span>
+<span class="sd">                :func:`pymatgen.core.structure.Structure.from_str`.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A Structure.</span>
@@ -163,14 +165,16 @@
     <span class="nd">@requires</span><span class="p">(</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;mysql&quot;</span><span class="p">),</span> <span class="s2">&quot;mysql must be installed to use this query.&quot;</span><span class="p">)</span>
 <div class="viewcode-block" id="COD.get_structure_by_formula"><a class="viewcode-back" href="../../../pymatgen.ext.cod.html#pymatgen.ext.cod.COD.get_structure_by_formula">[docs]</a>    <span class="k">def</span> <span class="nf">get_structure_by_formula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Queries the COD for structures by formula.</span>
+<span class="sd">        Queries the COD for structures by formula. Requires mysql executable to</span>
+<span class="sd">        be in the path.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            cod_id (int): COD id.</span>
-<span class="sd">            kwargs: All kwargs supported by Structure.from_str.</span>
+<span class="sd">            kwargs: All kwargs supported by</span>
+<span class="sd">                :func:`pymatgen.core.structure.Structure.from_str`.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            A Structure.</span>
+<span class="sd">            [{&quot;structure&quot;: Structure, &quot;cod_id&quot;: cod_id, &quot;sg&quot;: &quot;P n m a&quot;}]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">structures</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;select file, sg from data where formula=&quot;- </span><span class="si">%s</span><span class="s1"> -&quot;&#39;</span> <span class="o">%</span> \
