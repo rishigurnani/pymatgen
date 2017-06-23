@@ -62,6 +62,34 @@
 <span class="c1"># Copyright (c) Pymatgen Development Team.</span>
 <span class="c1"># Distributed under the terms of the MIT License.</span>
 
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module provides classes to interface with the Crystallography Open</span>
+<span class="sd">Database. If you use data from the COD, please cite the following works (as</span>
+<span class="sd">stipulated by the COD developers)::</span>
+
+<span class="sd">    Merkys, A., Vaitkus, A., Butkus, J., Okulič-Kazarinas, M., Kairys, V. &amp;</span>
+<span class="sd">    Gražulis, S. (2016) &quot;COD::CIF::Parser: an error-correcting CIF parser for</span>
+<span class="sd">    the Perl language&quot;. Journal of Applied Crystallography 49.</span>
+
+<span class="sd">    Gražulis, S., Merkys, A., Vaitkus, A. &amp; Okulič-Kazarinas, M. (2015)</span>
+<span class="sd">    &quot;Computing stoichiometric molecular composition from crystal structures&quot;.</span>
+<span class="sd">    Journal of Applied Crystallography 48, 85-91.</span>
+
+<span class="sd">    Gražulis, S., Daškevič, A., Merkys, A., Chateigner, D., Lutterotti, L.,</span>
+<span class="sd">    Quirós, M., Serebryanaya, N. R., Moeck, P., Downs, R. T. &amp; LeBail, A.</span>
+<span class="sd">    (2012) &quot;Crystallography Open Database (COD): an open-access collection of</span>
+<span class="sd">    crystal structures and platform for world-wide collaboration&quot;. Nucleic</span>
+<span class="sd">    Acids Research 40, D420-D427.</span>
+
+<span class="sd">    Grazulis, S., Chateigner, D., Downs, R. T., Yokochi, A. T., Quiros, M.,</span>
+<span class="sd">    Lutterotti, L., Manakova, E., Butkus, J., Moeck, P. &amp; Le Bail, A. (2009)</span>
+<span class="sd">    &quot;Crystallography Open Database – an open-access collection of crystal</span>
+<span class="sd">    structures&quot;. J. Appl. Cryst. 42, 726-729.</span>
+
+<span class="sd">    Downs, R. T. &amp; Hall-Wallace, M. (2003) &quot;The American Mineralogist Crystal</span>
+<span class="sd">    Structure Database&quot;. American Mineralogist 88, 247-250.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">from</span> <span class="nn">monty.dev</span> <span class="k">import</span> <span class="n">requires</span>
@@ -71,34 +99,6 @@
 <span class="kn">from</span> <span class="nn">pymatgen.core.composition</span> <span class="k">import</span> <span class="n">Composition</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="k">import</span> <span class="n">Structure</span>
 <span class="kn">from</span> <span class="nn">pymatgen.util.string</span> <span class="k">import</span> <span class="n">formula_double_format</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">This module provides classes to interface with the Crystallography Open </span>
-<span class="sd">Database. If you use data from the COD, please cite the following works (as</span>
-<span class="sd">stipulated by the COD developers)::</span>
-
-<span class="sd">    Merkys, A., Vaitkus, A., Butkus, J., Okulič-Kazarinas, M., Kairys, V. &amp; </span>
-<span class="sd">    Gražulis, S. (2016) &quot;COD::CIF::Parser: an error-correcting CIF parser for </span>
-<span class="sd">    the Perl language&quot;. Journal of Applied Crystallography 49. </span>
-<span class="sd">    </span>
-<span class="sd">    Gražulis, S., Merkys, A., Vaitkus, A. &amp; Okulič-Kazarinas, M. (2015) </span>
-<span class="sd">    &quot;Computing stoichiometric molecular composition from crystal structures&quot;. </span>
-<span class="sd">    Journal of Applied Crystallography 48, 85-91.</span>
-<span class="sd">    </span>
-<span class="sd">    Gražulis, S., Daškevič, A., Merkys, A., Chateigner, D., Lutterotti, L., </span>
-<span class="sd">    Quirós, M., Serebryanaya, N. R., Moeck, P., Downs, R. T. &amp; LeBail, A. </span>
-<span class="sd">    (2012) &quot;Crystallography Open Database (COD): an open-access collection of </span>
-<span class="sd">    crystal structures and platform for world-wide collaboration&quot;. Nucleic </span>
-<span class="sd">    Acids Research 40, D420-D427.</span>
-<span class="sd">    </span>
-<span class="sd">    Grazulis, S., Chateigner, D., Downs, R. T., Yokochi, A. T., Quiros, M., </span>
-<span class="sd">    Lutterotti, L., Manakova, E., Butkus, J., Moeck, P. &amp; Le Bail, A. (2009) </span>
-<span class="sd">    &quot;Crystallography Open Database – an open-access collection of crystal </span>
-<span class="sd">    structures&quot;. J. Appl. Cryst. 42, 726-729.</span>
-<span class="sd">    </span>
-<span class="sd">    Downs, R. T. &amp; Hall-Wallace, M. (2003) &quot;The American Mineralogist Crystal</span>
-<span class="sd">    Structure Database&quot;. American Mineralogist 88, 247-250.</span>
-<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Shyue Ping Ong&quot;</span>
 <span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2012, The Materials Project&quot;</span>
