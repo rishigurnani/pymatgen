@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &#8212; pymatgen 2017.6.22 documentation</title>
+    <title>Introduction &#8212; pymatgen 2017.6.24 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2017.6.22',
+        VERSION:     '2017.6.24',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -50,7 +50,7 @@
         <li class="right" >
           <a href="installation.html" title="Requirements"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">pymatgen 2017.6.22 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">pymatgen 2017.6.24 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -144,14 +144,16 @@ compatible. Our approach is to have a single codebase support Python 2.7 and
 </div>
 <div class="section" id="change-log">
 <h1>Change log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="v2017-6-22">
-<h2>v2017.6.22<a class="headerlink" href="#v2017-6-22" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="v2017-6-24">
+<h2>v2017.6.24<a class="headerlink" href="#v2017-6-24" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Speed up pmg load times.</li>
-<li>Selective dynamics parsing for Vasprun (Joseph Montaya)</li>
-<li>Allow element radius updates in get_dimensionality (Viet-Anh Ha).</li>
-<li>Dielectric function parse for vasp 5.4.4 (Zhenbin Wang).</li>
-<li>Parsing for CIF implicit hydrogens (Xiaohui Qu).</li>
+<li>New package pymatgen.ext supporting external interfaces. Materials Project
+REST interface has been moved to pymatgen.ext.matproj. Backwards compatibility
+will be maintained until 2018.</li>
+<li>Two new interfaces have been added: i) Support for John Hopkin&#8217;s Mueller
+group&#8217;s efficient k-point servelet (J Montaya). ii) Support for
+Crystallography Open Database structure queries and downloads. (S. P. Ong).
+See <a href="#id4"><span class="problematic" id="id5">`examples`_</span></a> page for usage.</li>
 </ul>
 <p><a class="reference internal" href="change_log.html"><span class="doc">Older versions</span></a></p>
 </div>
@@ -539,7 +541,7 @@ publications) in pymatgen.</p>
 <div class="section" id="reporting-bugs">
 <h2>Reporting bugs<a class="headerlink" href="#reporting-bugs" title="Permalink to this headline">¶</a></h2>
 <p>A simple way that anyone can contribute is simply to report bugs and issues
-to the developing team. You can either send an email to the <a href="#id4"><span class="problematic" id="id5">`pymatgen&#8217;s
+to the developing team. You can either send an email to the <a href="#id6"><span class="problematic" id="id7">`pymatgen&#8217;s
 Google Groups page`_</span></a> or even better, submit an Issue in our <a class="reference external" href="https://github.com/materialsproject/pymatgen/issues">Github page</a>.</p>
 </div>
 <div class="section" id="developing-new-functionality">
@@ -637,7 +639,7 @@ to indicate the copyright and license terms:</p>
 <li><a class="reference internal" href="#matgenie-examples">Matgenie &amp; Examples</a></li>
 <li><a class="reference internal" href="#why-use-pymatgen">Why use pymatgen?</a></li>
 <li><a class="reference internal" href="#change-log">Change log</a><ul>
-<li><a class="reference internal" href="#v2017-6-22">v2017.6.22</a></li>
+<li><a class="reference internal" href="#v2017-6-24">v2017.6.24</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#getting-pymatgen">Getting pymatgen</a><ul>
@@ -702,7 +704,7 @@ to indicate the copyright and license terms:</p>
         <li class="right" >
           <a href="installation.html" title="Requirements"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">pymatgen 2017.6.22 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">pymatgen 2017.6.24 documentation</a> &#187;</li> 
       </ul>
     </div>
 

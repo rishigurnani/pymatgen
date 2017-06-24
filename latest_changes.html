@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Change log &#8212; pymatgen 2017.6.22 documentation</title>
+    <title>Change log &#8212; pymatgen 2017.6.24 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2017.6.22',
+        VERSION:     '2017.6.24',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 2017.6.22 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 2017.6.24 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -57,14 +57,16 @@
             
   <div class="section" id="change-log">
 <h1>Change log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="v2017-6-22">
-<h2>v2017.6.22<a class="headerlink" href="#v2017-6-22" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="v2017-6-24">
+<h2>v2017.6.24<a class="headerlink" href="#v2017-6-24" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Speed up pmg load times.</li>
-<li>Selective dynamics parsing for Vasprun (Joseph Montaya)</li>
-<li>Allow element radius updates in get_dimensionality (Viet-Anh Ha).</li>
-<li>Dielectric function parse for vasp 5.4.4 (Zhenbin Wang).</li>
-<li>Parsing for CIF implicit hydrogens (Xiaohui Qu).</li>
+<li>New package pymatgen.ext supporting external interfaces. Materials Project
+REST interface has been moved to pymatgen.ext.matproj. Backwards compatibility
+will be maintained until 2018.</li>
+<li>Two new interfaces have been added: i) Support for John Hopkin&#8217;s Mueller
+group&#8217;s efficient k-point servelet (J Montaya). ii) Support for
+Crystallography Open Database structure queries and downloads. (S. P. Ong).
+See <a href="#id1"><span class="problematic" id="id2">`examples`_</span></a> page for usage.</li>
 </ul>
 </div>
 </div>
@@ -78,7 +80,7 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Change log</a><ul>
-<li><a class="reference internal" href="#v2017-6-22">v2017.6.22</a></li>
+<li><a class="reference internal" href="#v2017-6-24">v2017.6.24</a></li>
 </ul>
 </li>
 </ul>
@@ -113,7 +115,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 2017.6.22 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 2017.6.24 documentation</a> &#187;</li> 
       </ul>
     </div>
 
