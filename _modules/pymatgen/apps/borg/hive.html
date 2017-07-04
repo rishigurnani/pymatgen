@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.apps.borg.hive &#8212; pymatgen 2017.6.24 documentation</title>
+    <title>pymatgen.apps.borg.hive &#8212; pymatgen 2017.7.4 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '2017.6.24',
+        VERSION:     '2017.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 2017.6.24 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 2017.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../pymatgen.html" accesskey="U">pymatgen</a> &#187;</li> 
       </ul>
@@ -64,6 +64,27 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
 
+
+<span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">fnmatch</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
+
+<span class="kn">from</span> <span class="nn">monty.io</span> <span class="k">import</span> <span class="n">zopen</span>
+<span class="kn">from</span> <span class="nn">pymatgen.io.vasp.inputs</span> <span class="k">import</span> <span class="n">Incar</span><span class="p">,</span> <span class="n">Potcar</span><span class="p">,</span> <span class="n">Poscar</span>
+<span class="kn">from</span> <span class="nn">pymatgen.io.vasp.outputs</span> <span class="k">import</span> <span class="n">Vasprun</span><span class="p">,</span> <span class="n">Oszicar</span><span class="p">,</span> <span class="n">Dynmat</span>
+<span class="kn">from</span> <span class="nn">pymatgen.io.gaussian</span> <span class="k">import</span> <span class="n">GaussianOutput</span>
+<span class="kn">from</span> <span class="nn">pymatgen.entries.computed_entries</span> <span class="k">import</span> <span class="n">ComputedEntry</span><span class="p">,</span> \
+    <span class="n">ComputedStructureEntry</span>
+<span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MSONable</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module define the various drones used to assimilate data.</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -76,24 +97,6 @@
 <span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;shyuep@gmail.com&quot;</span>
 <span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;Mar 18, 2012&quot;</span>
 
-<span class="kn">import</span> <span class="nn">abc</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">fnmatch</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-<span class="kn">import</span> <span class="nn">six</span>
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
-
-<span class="kn">from</span> <span class="nn">monty.io</span> <span class="k">import</span> <span class="n">zopen</span>
-<span class="kn">from</span> <span class="nn">pymatgen.io.vasp.inputs</span> <span class="k">import</span> <span class="n">Incar</span><span class="p">,</span> <span class="n">Potcar</span><span class="p">,</span> <span class="n">Poscar</span>
-<span class="kn">from</span> <span class="nn">pymatgen.io.vasp.outputs</span> <span class="k">import</span> <span class="n">Vasprun</span><span class="p">,</span> <span class="n">Oszicar</span><span class="p">,</span> <span class="n">Dynmat</span>
-<span class="kn">from</span> <span class="nn">pymatgen.io.gaussian</span> <span class="k">import</span> <span class="n">GaussianOutput</span>
-<span class="kn">from</span> <span class="nn">pymatgen.entries.computed_entries</span> <span class="k">import</span> <span class="n">ComputedEntry</span><span class="p">,</span> \
-    <span class="n">ComputedStructureEntry</span>
-<span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MSONable</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -188,24 +191,11 @@
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vasprun_files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">filepath</span> <span class="o">=</span> <span class="n">vasprun_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">vasprun_files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">                This is a bit confusing, since there maybe be multi-steps. By</span>
-<span class="sd">                default, assimilate will try to find a file simply named</span>
-<span class="sd">                vasprun.xml, vasprun.xml.bz2, or vasprun.xml.gz.  Failing which</span>
-<span class="sd">                it will try to get a relax2 from an aflow style run if</span>
-<span class="sd">                possible. Or else, a randomly chosen file containing</span>
-<span class="sd">                vasprun.xml is chosen.</span>
-<span class="sd">                &quot;&quot;&quot;</span>
-                <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">vasprun_files</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;vasprun.xml&quot;</span><span class="p">,</span>
-                                                   <span class="s2">&quot;vasprun.xml.gz&quot;</span><span class="p">,</span>
-                                                   <span class="s2">&quot;vasprun.xml.bz2&quot;</span><span class="p">]:</span>
-                        <span class="n">filepath</span> <span class="o">=</span> <span class="n">fname</span>
-                        <span class="k">break</span>
-                    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;relax2&quot;</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
-                        <span class="n">filepath</span> <span class="o">=</span> <span class="n">fname</span>
-                        <span class="k">break</span>
-                    <span class="n">filepath</span> <span class="o">=</span> <span class="n">fname</span>
+                <span class="c1"># Since multiple files are ambiguous, we will always read</span>
+                <span class="c1"># the one that it the last one alphabetically.</span>
+                <span class="n">filepath</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">vasprun_files</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> vasprun.xml.* found. </span><span class="si">%s</span><span class="s2"> is being parsed.&quot;</span> <span class="o">%</span>
+                              <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vasprun_files</span><span class="p">),</span> <span class="n">filepath</span><span class="p">))</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">vasprun</span> <span class="o">=</span> <span class="n">Vasprun</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
@@ -281,7 +271,7 @@
                 <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="p">(</span>
                     <span class="s2">&quot;INCAR&quot;</span><span class="p">,</span> <span class="s2">&quot;POTCAR&quot;</span><span class="p">,</span> <span class="s2">&quot;CONTCAR&quot;</span><span class="p">,</span> <span class="s2">&quot;OSZICAR&quot;</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">,</span> <span class="s2">&quot;DYNMAT&quot;</span>
                 <span class="p">):</span>
-                    <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span><span class="p">))</span>
+                    <span class="n">files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span><span class="p">)))</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
                         <span class="k">continue</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">filename</span> <span class="o">==</span> <span class="s2">&quot;INCAR&quot;</span> <span class="ow">or</span> \
@@ -289,29 +279,17 @@
                         <span class="n">files_to_parse</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>\
                             <span class="k">if</span> <span class="n">filename</span> <span class="o">==</span> <span class="s2">&quot;POTCAR&quot;</span> <span class="k">else</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">                        This is a bit confusing, since there maybe be</span>
-<span class="sd">                        multiple steps. By default, assimilate will try to find</span>
-<span class="sd">                        a file simply named filename, filename.bz2, or</span>
-<span class="sd">                        filename.gz.  Failing which it will try to get a relax2</span>
-<span class="sd">                        from a custodian double relaxation style run if</span>
-<span class="sd">                        possible. Or else, a random file is chosen.</span>
-<span class="sd">                        &quot;&quot;&quot;</span>
-                        <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">fname</span><span class="p">),</span>
-                                               <span class="sa">r</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">(\.gz|\.bz2)*&quot;</span>
-                                               <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">)):</span>
-                                <span class="n">files_to_parse</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="n">fname</span>
-                                <span class="k">break</span>
-                            <span class="k">if</span> <span class="n">fname</span> <span class="o">==</span> <span class="s2">&quot;POSCAR&quot;</span> <span class="ow">and</span> \
-                                    <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;relax1&quot;</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
-                                <span class="n">files_to_parse</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="n">fname</span>
-                                <span class="k">break</span>
-                            <span class="k">if</span> <span class="p">(</span><span class="n">fname</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;CONTCAR&quot;</span><span class="p">,</span> <span class="s2">&quot;OSZICAR&quot;</span><span class="p">)</span> <span class="ow">and</span>
-                                    <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;relax2&quot;</span><span class="p">,</span> <span class="n">fname</span><span class="p">)):</span>
-                                <span class="n">files_to_parse</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="n">fname</span>
-                                <span class="k">break</span>
-                            <span class="n">files_to_parse</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="n">fname</span>
+                        <span class="c1"># Since multiple files are ambiguous, we will always</span>
+                        <span class="c1"># use the first one for POSCAR and the last one</span>
+                        <span class="c1"># alphabetically for CONTCAR and OSZICAR.</span>
+
+                        <span class="k">if</span> <span class="n">filename</span> <span class="o">==</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">:</span>
+                            <span class="n">files_to_parse</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">files_to_parse</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                            <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> files found. </span><span class="si">%s</span><span class="s2"> is being parsed.&quot;</span> <span class="o">%</span>
+                            <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">),</span> <span class="n">files_to_parse</span><span class="p">[</span><span class="n">filename</span><span class="p">]))</span>
 
             <span class="n">poscar</span><span class="p">,</span> <span class="n">contcar</span><span class="p">,</span> <span class="n">incar</span><span class="p">,</span> <span class="n">potcar</span><span class="p">,</span> <span class="n">oszicar</span><span class="p">,</span> <span class="n">dynmat</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span>
             <span class="k">if</span> <span class="s1">&#39;POSCAR&#39;</span> <span class="ow">in</span> <span class="n">files_to_parse</span><span class="p">:</span>
@@ -509,7 +487,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 2017.6.24 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 2017.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../pymatgen.html" >pymatgen</a> &#187;</li> 
       </ul>

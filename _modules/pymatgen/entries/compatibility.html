@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.entries.compatibility &#8212; pymatgen 2017.6.24 documentation</title>
+    <title>pymatgen.entries.compatibility &#8212; pymatgen 2017.7.4 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2017.6.24',
+        VERSION:     '2017.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 2017.6.24 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 2017.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymatgen.html" accesskey="U">pymatgen</a> &#187;</li> 
       </ul>
@@ -65,6 +65,7 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">six</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">filter</span><span class="p">,</span> <span class="nb">map</span>
 
@@ -311,6 +312,11 @@
                         <span class="n">correction</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oxide_correction</span><span class="p">[</span><span class="s2">&quot;oxide&quot;</span><span class="p">]</span> <span class="o">*</span> \
                                       <span class="n">comp</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">]</span>
                 <span class="k">else</span><span class="p">:</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                        <span class="s2">&quot;No structure or oxide_type parameter present. Note&quot;</span>
+                        <span class="s2">&quot;that peroxide/superoxide corrections are not as &quot;</span>
+                        <span class="s2">&quot;reliable and relies only on detection of special&quot;</span>
+                        <span class="s2">&quot;formulas, e.g., Li2O2.&quot;</span><span class="p">)</span>
                     <span class="n">rform</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">composition</span><span class="o">.</span><span class="n">reduced_formula</span>
                     <span class="k">if</span> <span class="n">rform</span> <span class="ow">in</span> <span class="n">UCorrection</span><span class="o">.</span><span class="n">common_peroxides</span><span class="p">:</span>
                         <span class="n">correction</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oxide_correction</span><span class="p">[</span><span class="s2">&quot;peroxide&quot;</span><span class="p">]</span> <span class="o">*</span> \
@@ -721,7 +727,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 2017.6.24 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 2017.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymatgen.html" >pymatgen</a> &#187;</li> 
       </ul>

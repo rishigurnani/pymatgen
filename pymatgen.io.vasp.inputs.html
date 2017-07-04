@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.vasp.inputs module &#8212; pymatgen 2017.6.24 documentation</title>
+    <title>pymatgen.io.vasp.inputs module &#8212; pymatgen 2017.7.4 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2017.6.24',
+        VERSION:     '2017.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 2017.6.24 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 2017.7.4 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -529,6 +529,86 @@ vectors. Defaults to (2,2,2)</li>
 </dd></dl>
 
 <dl class="class">
+<dt id="pymatgen.io.vasp.inputs.Orbital">
+<em class="property">class </em><code class="descname">Orbital</code><span class="sig-paren">(</span><em>n</em>, <em>l</em>, <em>j</em>, <em>E</em>, <em>occ</em><span class="sig-paren">)</span><a class="headerlink" href="#pymatgen.io.vasp.inputs.Orbital" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
+<p>Create new instance of Orbital(n, l, j, E, occ)</p>
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.Orbital.E">
+<code class="descname">E</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.Orbital.E" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.Orbital.j">
+<code class="descname">j</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.Orbital.j" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.Orbital.l">
+<code class="descname">l</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.Orbital.l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.Orbital.n">
+<code class="descname">n</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.Orbital.n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.Orbital.occ">
+<code class="descname">occ</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.Orbital.occ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pymatgen.io.vasp.inputs.OrbitalDescription">
+<em class="property">class </em><code class="descname">OrbitalDescription</code><span class="sig-paren">(</span><em>l</em>, <em>E</em>, <em>Type</em>, <em>Rcut</em>, <em>Type2</em>, <em>Rcut2</em><span class="sig-paren">)</span><a class="headerlink" href="#pymatgen.io.vasp.inputs.OrbitalDescription" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
+<p>Create new instance of OrbitalDescription(l, E, Type, Rcut, Type2, Rcut2)</p>
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.OrbitalDescription.E">
+<code class="descname">E</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.OrbitalDescription.E" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.OrbitalDescription.Rcut">
+<code class="descname">Rcut</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.OrbitalDescription.Rcut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.OrbitalDescription.Rcut2">
+<code class="descname">Rcut2</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.OrbitalDescription.Rcut2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 5</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.OrbitalDescription.Type">
+<code class="descname">Type</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.OrbitalDescription.Type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.OrbitalDescription.Type2">
+<code class="descname">Type2</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.OrbitalDescription.Type2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.OrbitalDescription.l">
+<code class="descname">l</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.OrbitalDescription.l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="pymatgen.io.vasp.inputs.Poscar">
 <em class="property">class </em><code class="descname">Poscar</code><span class="sig-paren">(</span><em>structure</em>, <em>comment=None</em>, <em>selective_dynamics=None</em>, <em>true_names=True</em>, <em>velocities=None</em>, <em>predictor_corrector=None</em>, <em>predictor_corrector_preamble=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/inputs.html#Poscar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.inputs.Poscar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">monty.json.MSONable</span></code></p>
@@ -891,8 +971,8 @@ the given map data rather than the config file location.</li>
 
 <dl class="class">
 <dt id="pymatgen.io.vasp.inputs.PotcarSingle">
-<em class="property">class </em><code class="descname">PotcarSingle</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/inputs.html#PotcarSingle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pymatgen.io.vasp.inputs.PotcarSingle" title="pymatgen.io.vasp.inputs.PotcarSingle"><code class="xref py py-class docutils literal"><span class="pre">pymatgen.io.vasp.inputs.PotcarSingle</span></code></a></p>
+<em class="property">class </em><code class="descname">PotcarSingle</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/inputs.html#PotcarSingle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Object for a <strong>single</strong> POTCAR. The builder assumes the complete string is
 the POTCAR contains the complete untouched data in &#8220;data&#8221; as a string and
 a dict of keywords.</p>
@@ -917,6 +997,84 @@ a dict of keywords.</p>
 accessible as attributes in themselves. E.g., potcar.enmax,
 potcar.encut, etc.</p>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.atomic_no">
+<code class="descname">atomic_no</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.atomic_no" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to return the atomic number based on the VRHFIN keyword.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.electron_configuration">
+<code class="descname">electron_configuration</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.electron_configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.element">
+<code class="descname">element</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to return the atomic symbol based on the VRHFIN keyword.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.from_file">
+<em class="property">static </em><code class="descname">from_file</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/inputs.html#PotcarSingle.from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.from_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.from_symbol_and_functional">
+<em class="property">static </em><code class="descname">from_symbol_and_functional</code><span class="sig-paren">(</span><em>symbol</em>, <em>functional=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/inputs.html#PotcarSingle.from_symbol_and_functional"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.from_symbol_and_functional" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.functional">
+<code class="descname">functional</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.functional" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.functional_class">
+<code class="descname">functional_class</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.functional_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.functional_dir">
+<code class="descname">functional_dir</code><em class="property"> = {'PBE': 'POT_GGA_PAW_PBE', 'PBE_52': 'POT_GGA_PAW_PBE_52', 'PBE_54': 'POT_GGA_PAW_PBE_54', 'LDA': 'POT_LDA_PAW', 'LDA_52': 'POT_LDA_PAW_52', 'LDA_54': 'POT_LDA_PAW_54', 'PW91': 'POT_GGA_PAW_PW91', 'LDA_US': 'POT_LDA_US', 'PW91_US': 'POT_GGA_US_PW91'}</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.functional_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.functional_tags">
+<code class="descname">functional_tags</code><em class="property"> = {'pe': {'name': 'PBE', 'class': 'GGA'}, '91': {'name': 'PW91', 'class': 'GGA'}, 'rp': {'name': 'revPBE', 'class': 'GGA'}, 'am': {'name': 'AM05', 'class': 'GGA'}, 'ps': {'name': 'PBEsol', 'class': 'GGA'}, 'pw': {'name': 'PW86', 'class': 'GGA'}, 'lm': {'name': 'Langreth-Mehl-Hu', 'class': 'GGA'}, 'pb': {'name': 'Perdew-Becke', 'class': 'GGA'}, 'ca': {'name': 'Perdew-Zunger81', 'class': 'LDA'}, 'hl': {'name': 'Hedin-Lundquist', 'class': 'LDA'}, 'wi': {'name': 'Wigner Interpoloation', 'class': 'LDA'}}</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.functional_tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.get_potcar_hash">
+<code class="descname">get_potcar_hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/inputs.html#PotcarSingle.get_potcar_hash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.get_potcar_hash" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.nelectrons">
+<code class="descname">nelectrons</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.nelectrons" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.parse_functions">
+<code class="descname">parse_functions</code><em class="property"> = {'LULTRA': &lt;function parse_bool&gt;, 'LUNSCR': &lt;function parse_bool&gt;, 'LCOR': &lt;function parse_bool&gt;, 'LPAW': &lt;function parse_bool&gt;, 'EATOM': &lt;function parse_float&gt;, 'RPACOR': &lt;function parse_float&gt;, 'POMASS': &lt;function parse_float&gt;, 'ZVAL': &lt;function parse_float&gt;, 'RCORE': &lt;function parse_float&gt;, 'RWIGS': &lt;function parse_float&gt;, 'ENMAX': &lt;function parse_float&gt;, 'ENMIN': &lt;function parse_float&gt;, 'EMMIN': &lt;function parse_float&gt;, 'EAUG': &lt;function parse_float&gt;, 'DEXC': &lt;function parse_float&gt;, 'RMAX': &lt;function parse_float&gt;, 'RAUG': &lt;function parse_float&gt;, 'RDEP': &lt;function parse_float&gt;, 'RDEPT': &lt;function parse_float&gt;, 'QCUT': &lt;function parse_float&gt;, 'QGAM': &lt;function parse_float&gt;, 'RCLOC': &lt;function parse_float&gt;, 'IUNSCR': &lt;function parse_int&gt;, 'ICORE': &lt;function parse_int&gt;, 'NDATA': &lt;function parse_int&gt;, 'VRHFIN': &lt;function parse_string&gt;, 'LEXCH': &lt;function parse_string&gt;, 'TITEL': &lt;function parse_string&gt;, 'STEP': &lt;function parse_list&gt;, 'RRKJ': &lt;function parse_list&gt;, 'GGA': &lt;function parse_list&gt;}</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.parse_functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.potential_type">
+<code class="descname">potential_type</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.potential_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.symbol">
+<code class="descname">symbol</code><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Symbol of POTCAR, e.g., Fe_pv</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.vasp.inputs.PotcarSingle.write_file">
+<code class="descname">write_file</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/inputs.html#PotcarSingle.write_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.inputs.PotcarSingle.write_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -1059,7 +1217,7 @@ present. Defaults to True.</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 2017.6.24 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 2017.7.4 documentation</a> &#187;</li> 
       </ul>
     </div>
 

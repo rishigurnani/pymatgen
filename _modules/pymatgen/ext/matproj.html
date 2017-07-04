@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.ext.matproj &#8212; pymatgen 2017.6.24 documentation</title>
+    <title>pymatgen.ext.matproj &#8212; pymatgen 2017.7.4 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2017.6.24',
+        VERSION:     '2017.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 2017.6.24 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 2017.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymatgen.html" accesskey="U">pymatgen</a> &#187;</li> 
       </ul>
@@ -369,7 +369,7 @@
         <span class="c1"># TODO: This is a very hackish way of doing this. It should be fixed</span>
         <span class="c1"># on the REST end.</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;run_type&quot;</span><span class="p">,</span> <span class="s2">&quot;is_hubbard&quot;</span><span class="p">,</span> <span class="s2">&quot;pseudo_potential&quot;</span><span class="p">,</span> <span class="s2">&quot;hubbards&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;potcar_symbols&quot;</span><span class="p">]</span>
+                  <span class="s2">&quot;potcar_symbols&quot;</span><span class="p">,</span> <span class="s2">&quot;oxide_type&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">compatible_only</span><span class="p">:</span>
             <span class="n">props</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span> <span class="s2">&quot;unit_cell_formula&quot;</span><span class="p">,</span> <span class="s2">&quot;task_id&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">params</span>
             <span class="k">if</span> <span class="n">property_data</span><span class="p">:</span>
@@ -392,7 +392,9 @@
                 <span class="n">d</span><span class="p">[</span><span class="s2">&quot;potcar_symbols&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
                     <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;pseudo_potential&quot;</span><span class="p">][</span><span class="s2">&quot;functional&quot;</span><span class="p">],</span> <span class="n">l</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;pseudo_potential&quot;</span><span class="p">][</span><span class="s2">&quot;labels&quot;</span><span class="p">]]</span>
-                <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">property_data</span><span class="p">}</span> <span class="k">if</span> <span class="n">property_data</span> <span class="k">else</span> <span class="kc">None</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;oxide_type&quot;</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;oxide_type&quot;</span><span class="p">]}</span>
+                <span class="k">if</span> <span class="n">property_data</span><span class="p">:</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">property_data</span><span class="p">})</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">inc_structure</span><span class="p">:</span>
                     <span class="n">e</span> <span class="o">=</span> <span class="n">ComputedEntry</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;unit_cell_formula&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">],</span>
                                       <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">params</span><span class="p">},</span>
@@ -472,7 +474,8 @@
 <span class="sd">            ComputedEntry or ComputedStructureEntry object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_entries</span><span class="p">(</span><span class="n">material_id</span><span class="p">,</span> <span class="n">compatible_only</span><span class="o">=</span><span class="n">compatible_only</span><span class="p">,</span>
-                                <span class="n">inc_structure</span><span class="o">=</span><span class="n">inc_structure</span><span class="p">,</span> <span class="n">property_data</span><span class="o">=</span><span class="n">property_data</span><span class="p">)</span>
+                                <span class="n">inc_structure</span><span class="o">=</span><span class="n">inc_structure</span><span class="p">,</span>
+                                <span class="n">property_data</span><span class="o">=</span><span class="n">property_data</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="MPRester.get_dos_by_material_id"><a class="viewcode-back" href="../../../pymatgen.ext.matproj.html#pymatgen.ext.matproj.MPRester.get_dos_by_material_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_dos_by_material_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">material_id</span><span class="p">):</span>
@@ -1044,7 +1047,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 2017.6.24 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 2017.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymatgen.html" >pymatgen</a> &#187;</li> 
       </ul>
